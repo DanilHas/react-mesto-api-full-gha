@@ -1,0 +1,29 @@
+.form__spinner {
+  position: relative;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background: conic-gradient(red, transparent);
+  animation: spinner 1s linear infinite;
+}
+
+@keyframes spinner {
+  from {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.form__spinner::before {
+  content: '';
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #000;
+  top: 5px;
+  left: 5px;
+}

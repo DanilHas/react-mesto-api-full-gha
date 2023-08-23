@@ -1,0 +1,22 @@
+.profile__about-yourself {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.22;
+  color: #fff;
+  margin: 0;
+  grid-area: about-yourself;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 767px) {
+  .profile__about-yourself {
+    font-size: 14px;
+    line-height: 1.21;
+    text-align: center;
+    max-width: 282px;
+    width: 100%;
+  }
+}

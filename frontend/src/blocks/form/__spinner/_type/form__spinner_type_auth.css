@@ -1,0 +1,7 @@
+.form__spinner_type_auth {
+  background: conic-gradient(black, transparent);
+}
+
+.form__spinner_type_auth::before {
+  background: #fff;
+}

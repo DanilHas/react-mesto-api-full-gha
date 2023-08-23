@@ -1,0 +1,25 @@
+.auth {
+  width: calc(100% - 400px);
+  display: flex;
+  justify-content: center;
+  padding: 60px 0 80px;
+}
+
+@media screen and (max-width: 1279px) {
+  .auth {
+    width: calc(100% - 200px);
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .auth {
+    width: calc(100% - 100px);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .auth {
+    padding: 40px 0 40px;
+    width: calc(100% - 60px);
+  }
+}

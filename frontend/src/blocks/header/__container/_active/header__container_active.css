@@ -1,0 +1,5 @@
+.header__container_active {
+  border-bottom: 1px solid rgba(84, 84, 84, .7);
+  padding-bottom: 40px;
+  transform: translate(0, 40px);
+}
