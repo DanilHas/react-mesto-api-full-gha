@@ -40,16 +40,13 @@ function Login({
     auth
       .authorize(email, password)
       .then((res) => {
-        if (res.token) {
-          localStorage.setItem('token', res.token);
-          setUserEmail(email);
-          setFormValues({
-            email: '',
-            password: '',
-          });
-          handleLogin();
-          navigate('/', { replace: true });
-        }
+        setUserEmail(email);
+        setFormValues({
+          email: '',
+          password: '',
+        });
+        handleLogin();
+        navigate('/', { replace: true });
       })
       .catch((err) => {
         setInfoTooltipOpen(true);

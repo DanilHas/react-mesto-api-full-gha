@@ -17,7 +17,12 @@ mongoose.connect(MONGO_DB);
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    credentials: true,
+    origin: 'https://mesto.project.nomoredomainsicu.ru',
+  }),
+);
 app.use(helmet());
 app.use(bodyParser.json());
 app.use(cookieParser());

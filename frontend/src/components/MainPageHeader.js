@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import headerLogo from '../images/header-logo.svg';
 import { useState } from 'react';
+import * as auth from '../utils/auth';
 
 function MainPageHeader({ userData, setLoggedIn }) {
   const [isBurgerMenuOpen, setBurgerMenuOpen] = useState(false);
@@ -11,9 +12,16 @@ function MainPageHeader({ userData, setLoggedIn }) {
   };
 
   const handleSignOut = () => {
-    localStorage.removeItem('token');
-    setLoggedIn(false);
-    navigate('/signin', { replace: true });
+    auth
+      .logout()
+      .then(() => {
+        document.cookie = 'loggedIn=true; max-age=-1';
+        setLoggedIn(false);
+        navigate('/signin', { replace: true });
+      })
+      .catch((err) => {
+        console.error(`${err} ${err.message}`);
+      });
   };
 
   return (

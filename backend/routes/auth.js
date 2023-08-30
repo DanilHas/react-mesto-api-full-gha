@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
-const { createUser, login } = require('../controllers/auth');
+const { createUser, login, logout } = require('../controllers/auth');
 const { regexToCheckUrl } = require('../utils/constants');
 
 router.post(
@@ -31,5 +31,7 @@ router.post(
   }),
   createUser,
 );
+
+router.get('/logout', logout);
 
 module.exports = router;

@@ -6,9 +6,8 @@ class Api {
 
   getUserInfo() {
     const promise = fetch(`${this._baseUrl}/users/me`, {
-      headers: {
-        authorization: this._headers.authorization,
-      },
+      method: 'GET',
+      credentials: 'include',
     });
 
     return this._returnPromiseResult(promise);
@@ -16,9 +15,8 @@ class Api {
 
   getInitialCards() {
     const promise = fetch(`${this._baseUrl}/cards`, {
-      headers: {
-        authorization: this._headers.authorization,
-      },
+      method: 'GET',
+      credentials: 'include',
     });
     return this._returnPromiseResult(promise);
   }
@@ -40,6 +38,7 @@ class Api {
   setUserInfo(formInputValues) {
     const promise = fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         name: formInputValues.name,
@@ -53,6 +52,7 @@ class Api {
   addNewCard(formInputValues) {
     const promise = fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         name: formInputValues.name,
@@ -66,9 +66,7 @@ class Api {
   deleteCard(id) {
     const promise = fetch(`${this._baseUrl}/cards/${id}`, {
       method: 'DELETE',
-      headers: {
-        authorization: this._headers.authorization,
-      },
+      credentials: 'include',
     });
 
     return this._returnPromiseResult(promise);
@@ -78,18 +76,14 @@ class Api {
     if (likeCardStatus) {
       const promise = fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
         method: 'PUT',
-        headers: {
-          authorization: this._headers.authorization,
-        },
+        credentials: 'include',
       });
 
       return this._returnPromiseResult(promise);
     } else {
       const promise = fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
         method: 'DELETE',
-        headers: {
-          authorization: this._headers.authorization,
-        },
+        credentials: 'include',
       });
 
       return this._returnPromiseResult(promise);
@@ -99,6 +93,7 @@ class Api {
   changeAvatar(url) {
     const promise = fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         avatar: url,
@@ -110,9 +105,8 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-66',
+  baseUrl: 'https://api.mesto.project.nomoredomainsicu.ru',
   headers: {
-    authorization: '7465e869-899f-4ef6-ae51-f5f41eae39be',
     'Content-Type': 'application/json',
   },
 });

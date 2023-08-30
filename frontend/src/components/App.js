@@ -40,15 +40,25 @@ function App() {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
+  const getCookie = (cookieName) => {
+    var result = document.cookie.match(
+      new RegExp(
+        '(?:^|; )' +
+          cookieName.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1') +
+          '=([^;]*)'
+      )
+    );
 
-    if (token) {
+    return result ? decodeURIComponent(result[1]) : undefined;
+  };
+
+  useEffect(() => {
+    if (getCookie('loggedIn')) {
       auth
-        .checkToken(token)
+        .checkToken()
         .then((res) => {
           if (res) {
-            setUserEmail(res.data.email);
+            setUserEmail(res.email);
             setLoggedIn(true);
             navigate('/', { replace: true });
           }
@@ -96,7 +106,7 @@ function App() {
   };
 
   const handleCardLike = (card) => {
-    const isLiked = card.likes.some((item) => item._id === currentUser._id);
+    const isLiked = card.likes.some((itemId) => itemId === currentUser._id);
 
     api
       .changeLikeCardStatus(card._id, !isLiked)

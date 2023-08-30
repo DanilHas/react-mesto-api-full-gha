@@ -4,8 +4,7 @@ const ForbiddenError = require('../errors/forbidden-err');
 
 const getCards = (req, res, next) =>
   Card.find()
-    .populate('owner')
-    .then((cards) => res.status(200).send(cards))
+    .then((cards) => res.status(200).send(cards.reverse()))
     .catch(next);
 
 const createCard = (req, res, next) => {

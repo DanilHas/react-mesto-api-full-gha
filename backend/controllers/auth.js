@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const ConflictError = require('../errors/conflict-err');
 
-const { JWT_KEY = 'SECRET_KEY' } = process.env;
+const { JWT_SECRET = 'SECRET_KEY', NODE_ENV = 'development' } = process.env;
 
 const createUser = (req, res, next) => {
   const { name, about, avatar, email, password } = req.body;
@@ -28,12 +28,20 @@ const login = (req, res, next) => {
 
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, JWT_KEY, { expiresIn: '7d' });
+      const token = jwt.sign(
+        { _id: user._id },
+        NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+        { expiresIn: '7d' },
+      );
 
       res
         .cookie('jwt', token, {
           maxAge: 3600000 * 24 * 7,
           httpOnly: true,
+          sameSite: true,
+        })
+        .cookie('loggedIn', 'true', {
+          maxAge: 3600000 * 24 * 7,
           sameSite: true,
         })
         .send({
@@ -47,4 +55,8 @@ const login = (req, res, next) => {
     .catch(next);
 };
 
-module.exports = { createUser, login };
+const logout = (req, res) => {
+  res.clearCookie('jwt').send({ message: 'Пользователь вышел с аккаунта' });
+};
+
+module.exports = { createUser, login, logout };
