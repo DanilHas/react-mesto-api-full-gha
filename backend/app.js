@@ -10,7 +10,7 @@ const router = require('./routes');
 const errorHandler = require('./middlewares/error-handler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const { PORT = 3000, MONGO_DB = 'mongodb://localhost:27017/mestodb' } =
+const { PORT = 3000, MONGO_DB = 'mongodb://localhost:127.0.0.1/mestodb' } =
   process.env;
 
 mongoose.connect(MONGO_DB);
