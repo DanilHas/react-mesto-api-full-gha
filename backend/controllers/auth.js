@@ -40,10 +40,6 @@ const login = (req, res, next) => {
           httpOnly: true,
           sameSite: true,
         })
-        .cookie('loggedIn', 'true', {
-          maxAge: 3600000 * 24 * 7,
-          sameSite: true,
-        })
         .send({
           name: user.name,
           about: user.about,
@@ -56,7 +52,7 @@ const login = (req, res, next) => {
 };
 
 const logout = (req, res) => {
-  res.clearCookie('jwt').clearCookie('loggedIn').send({ message: 'Пользователь вышел с аккаунта' });
+  res.clearCookie('jwt').send({ message: 'Пользователь вышел с аккаунта' });
 };
 
 module.exports = { createUser, login, logout };

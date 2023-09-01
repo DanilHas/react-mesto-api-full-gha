@@ -40,20 +40,10 @@ function App() {
 
   const navigate = useNavigate();
 
-  const getCookie = (cookieName) => {
-    var result = document.cookie.match(
-      new RegExp(
-        '(?:^|; )' +
-          cookieName.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1') +
-          '=([^;]*)'
-      )
-    );
-
-    return result ? decodeURIComponent(result[1]) : undefined;
-  };
-
   useEffect(() => {
-    if (getCookie('loggedIn')) {
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+
+    if (isLoggedIn) {
       auth
         .checkToken()
         .then((res) => {

@@ -40,6 +40,7 @@ function Login({
     auth
       .authorize(email, password)
       .then((res) => {
+        localStorage.setItem('isLoggedIn', true);
         setUserEmail(email);
         setFormValues({
           email: '',

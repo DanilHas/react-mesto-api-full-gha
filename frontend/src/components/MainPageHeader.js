@@ -15,6 +15,7 @@ function MainPageHeader({ userData, setLoggedIn }) {
     auth
       .logout()
       .then(() => {
+        localStorage.removeItem('isLoggedIn');
         setLoggedIn(false);
         navigate('/signin', { replace: true });
       })
