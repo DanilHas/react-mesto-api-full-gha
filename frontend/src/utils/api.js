@@ -8,6 +8,7 @@ class Api {
     const promise = fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
       credentials: 'include',
+      headers: this._headers,
     });
 
     return this._returnPromiseResult(promise);
@@ -17,6 +18,7 @@ class Api {
     const promise = fetch(`${this._baseUrl}/cards`, {
       method: 'GET',
       credentials: 'include',
+      headers: this._headers,
     });
     return this._returnPromiseResult(promise);
   }

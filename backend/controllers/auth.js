@@ -56,7 +56,7 @@ const login = (req, res, next) => {
 };
 
 const logout = (req, res) => {
-  res.clearCookie('jwt').send({ message: 'Пользователь вышел с аккаунта' });
+  res.clearCookie('jwt').clearCookie('loggedIn').send({ message: 'Пользователь вышел с аккаунта' });
 };
 
 module.exports = { createUser, login, logout };

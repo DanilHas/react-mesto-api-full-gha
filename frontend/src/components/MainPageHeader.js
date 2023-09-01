@@ -15,7 +15,6 @@ function MainPageHeader({ userData, setLoggedIn }) {
     auth
       .logout()
       .then(() => {
-        document.cookie = 'loggedIn=true; max-age=-1';
         setLoggedIn(false);
         navigate('/signin', { replace: true });
       })
