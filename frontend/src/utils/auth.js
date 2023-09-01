@@ -49,6 +49,9 @@ export const logout = () => {
   return fetch(`${BASE_URL}logout`, {
     method: 'GET',
     credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+    },
   }).then((response) => {
     return getResponseData(response);
   });

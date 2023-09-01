@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const ConflictError = require('../errors/conflict-err');
 
-const { JWT_SECRET = 'SECRET_KEY', NODE_ENV = 'development' } = process.env;
+const { JWT_SECRET = 'SECRET_KEY', NODE_ENV = 'production' } = process.env;
 
 const createUser = (req, res, next) => {
   const { name, about, avatar, email, password } = req.body;
