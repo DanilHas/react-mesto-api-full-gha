@@ -1,6 +1,24 @@
 const User = require('../models/user');
 const NotFoundError = require('../errors/not-found-err');
 
+const findItemById = (model, id, errorText) => {
+  model.findById(id)
+  .orFail(new NotFoundError(errorText))
+    .then((item) => item)
+};
+
+const findByIdDecorator = (func) =>
+  function(model, id, errorText) {
+    if (id) {
+      return Promise.then((item) => item);
+    }
+
+    return func(model, id, errorText);
+  }
+;
+
+const findById = findByIdDecorator(findItemById);
+
 const getUsers = (req, res, next) =>
   User.find()
     .then((users) => res.status(200).send(users))
@@ -9,10 +27,14 @@ const getUsers = (req, res, next) =>
 const getCurrentUser = (req, res, next) => {
   const { userId } = req.params;
 
-  User.findById(userId)
-    .orFail(new NotFoundError('Запрашиваемый пользователь не найден'))
-    .then((user) => res.status(200).send(user))
-    .catch(next);
+  findById(User, userId, 'Запрашиваемый пользователь не найден')
+  .then((user) => res.status(200).send(user))
+  .catch(next);
+
+  // User.findById(userId)
+  //   .orFail(new NotFoundError('Запрашиваемый пользователь не найден'))
+  //   .then((user) => res.status(200).send(user))
+  //   .catch(next);
 };
 
 const updateProfile = (req, res, next) => {
@@ -25,7 +47,6 @@ const updateProfile = (req, res, next) => {
     {
       new: true,
       runValidators: true,
-      upsert: true,
     },
   )
     .then((user) => res.status(200).send(user))
@@ -42,7 +63,6 @@ const updateAvatar = (req, res, next) => {
     {
       new: true,
       runValidators: true,
-      upsert: true,
     },
   )
     .then((user) => res.status(200).send(user))
@@ -52,10 +72,14 @@ const updateAvatar = (req, res, next) => {
 const getUserInfo = (req, res, next) => {
   const userId = req.user._id;
 
-  User.findById(userId)
-    .orFail(new NotFoundError('Запрашиваемый пользователь не найден'))
-    .then((user) => res.status(200).send(user))
-    .catch(next);
+  findById(User, userId, 'Запрашиваемый пользователь не найден')
+  .then((user) => res.status(200).send(user))
+  .catch(next);
+
+  // User.findById(userId)
+  //   .orFail(new NotFoundError('Запрашиваемый пользователь не найден'))
+  //   .then((user) => res.status(200).send(user))
+  //   .catch(next);
 };
 
 module.exports = {
