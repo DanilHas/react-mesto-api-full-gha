@@ -10,7 +10,6 @@ const errorHandler = require('./middlewares/error-handler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { PORT, MONGO_DB } = require('./config');
 
-
 mongoose.connect(MONGO_DB);
 
 const app = express();

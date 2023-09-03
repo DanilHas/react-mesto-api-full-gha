@@ -4,7 +4,6 @@ const User = require('../models/user');
 const ConflictError = require('../errors/conflict-err');
 const { JWT_SECRET, NODE_ENV } = require('../config');
 
-
 const createUser = (req, res, next) => {
   const { name, about, avatar, email, password } = req.body;
 
